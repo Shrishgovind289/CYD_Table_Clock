@@ -11,4 +11,7 @@ Reference Code: https://github.com/gmag11/WifiLocation
 
 WeatherAPI.com was used to get weather data. https://www.weatherapi.com/
 
+![V1](https://github.com/user-attachments/assets/b389e814-ec45-466e-8340-74e36d75b2b3)
+
+
 Now that the inital version is complete as I proceed I may feature but the graphics part will take time.
