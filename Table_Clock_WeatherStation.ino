@@ -4,10 +4,10 @@
 
 ST7796U tft(LCD_CS, LCD_DC, LCD_RST, LCD_BL, LCD_SCK, LCD_MOSI);
 
-const char* ssid = "235-SS_2-APT_5";
-const char* password = "StevensDucks@235";
-const char* googleApiKey = "AIzaSyCfrrBitegYd4u5LMWwROPBVlPHRaP3ehA";
-String weatherApiKey = "04ea7544d7474d9fb99172321250307";
+const char* ssid = "SSID";
+const char* password = "PASSWORD";
+const char* googleApiKey = "YOUR_GOOGLE_API";
+String weatherApiKey = "YOUR_WEATHER_API";
 
 NTPClock ntpclock("pool.ntp.org");
 WeatherStation weatherStation(googleApiKey, weatherApiKey);
