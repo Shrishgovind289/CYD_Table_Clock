@@ -9,23 +9,22 @@
 
 class WeatherStation {
 public:
-    WeatherStation(const char* googleApiKey, const String& weatherApiKey);
+    WeatherStation(const String& weatherApiKey);
     
     void begin(const char* ssid, const char* password);
     void updateWeather();           // Fetch weather periodically
-    void updateLocationOnce();      // Fetch location once in setup()
+    void fetchWeather();
 
 private:
     const char* _ssid;
     const char* _password;
     String _weatherApiKey;
     WifiLocation _location;
-    String _latlon = "40.7128,-74.0060";  // Default New York
+    String _latlon = "LAT, LON";  // Default Home
 
     unsigned long _weatherTimer = 0;
     const unsigned long _weatherInterval = 1800000;  // 30 mintues
 
-    void fetchWeather();
     String httpGETRequest(const char* serverName);
 };
 
