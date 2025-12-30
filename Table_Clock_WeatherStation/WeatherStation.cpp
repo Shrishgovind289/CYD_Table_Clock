@@ -3,38 +3,8 @@
 ST7796U weather_display(LCD_CS, LCD_DC, LCD_RST, LCD_BL, LCD_SCK, LCD_MOSI);
 unsigned long numUpdates;
 
-WeatherStation::WeatherStation(const char* googleApiKey, const String& weatherApiKey)
-    : _location(googleApiKey), _weatherApiKey(weatherApiKey) {}
-
-void WeatherStation::begin(const char* ssid, const char* password) {
-    _ssid = ssid;
-    _password = password;
-
-    Serial.print("Connecting to WiFi");
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-    }
-    Serial.println("\nConnected to WiFi!");
-}
-
-void WeatherStation::updateLocationOnce() {
-    location_t loc = _location.getGeoFromWiFi();
-
-    if (loc.lat != 0.0 && loc.lon != 0.0) {
-        _latlon = String(loc.lat, 6) + "," + String(loc.lon, 6);
-        Serial.println("📍 Location fetched once:");
-        Serial.println("LatLon: " + _latlon);
-    } else {
-        Serial.println("⚠️ Failed to get valid location. Using default.");
-    }
-
-    Serial.println("🛰️ Accuracy: " + String(loc.accuracy));
-    Serial.println("Result: " + _location.wlStatusStr(_location.getStatus()));
-
-    fetchWeather();
-}
+WeatherStation::WeatherStation(const String& weatherApiKey)
+    : _weatherApiKey(weatherApiKey) {}
 
 void WeatherStation::updateWeather() {
     unsigned long currentMillis = millis();
@@ -90,7 +60,7 @@ void WeatherStation::fetchWeather() {
     // Current Weather
     weather_display.printText(40, 120, "Today's Weather Data:", 0xFFFF, 0x0000);
 
-    String condition = Aaj["condition"]["text"].as<String>();
+    String condition = Aaj["condition"]["text"];//.as<String>();
     String temp = String(Aaj["temp_c"].as<float>(), 1);
     String feelslike = String(Aaj["feelslike_c"].as<float>(), 1);
     String humidity = String(Aaj["humidity"].as<int>());
@@ -105,7 +75,7 @@ void WeatherStation::fetchWeather() {
     weather_display.printText(120, 200, humidity.c_str(), 0xFFFF, 0x0000);
 
     // Forecast Next Day
-    String kal_date = Kal["date"].as<String>();
+    String kal_date = Kal["date"];//.as<String>();
     String kal_condition = Kal["day"]["condition"]["text"].as<String>();
     String kal_maxtemp = String(Kal["day"]["maxtemp_c"].as<float>(), 1);
     String kal_mintemp = String(Kal["day"]["mintemp_c"].as<float>(), 1);
@@ -120,7 +90,7 @@ void WeatherStation::fetchWeather() {
     weather_display.printText(120, 280, kal_mintemp.c_str(), 0xFFFF, 0x0000);
 
     // Forecast Next Day
-    String parso_date = Parso["date"].as<String>();
+    String parso_date = Parso["date"];//.as<String>();
     String parso_condition = Parso["day"]["condition"]["text"].as<String>();
     String parso_maxtemp = String(Parso["day"]["maxtemp_c"].as<float>(), 1);
     String parso_mintemp = String(Parso["day"]["mintemp_c"].as<float>(), 1);
