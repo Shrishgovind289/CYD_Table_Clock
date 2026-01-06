@@ -6,9 +6,6 @@ I do have plans to used Graphics library to create animations. The fonts.h file 
 
 In this project I am using NTP Server to get the time data using my network.
 
-Google GeoLocation API was used to get the live location of my device. It does it only once due to striction in number of API calls made in a day. Plus Once is more than enough.
-Reference Code: https://github.com/gmag11/WifiLocation 
-
 WeatherAPI.com was used to get weather data. https://www.weatherapi.com/
 
 ![V1](https://github.com/user-attachments/assets/b389e814-ec45-466e-8340-74e36d75b2b3)
